@@ -16,6 +16,7 @@ public class Menu {
         menu.add(new Show(ui));
         menu.add(new AddCommand(ui));
         menu.add(new ShowCommands(ui));
+        menu.add(new BirthdayAnimals(ui));
         menu.add(new Exit(ui));
 
         MenuItem menuItem; // = menu.getFirst();

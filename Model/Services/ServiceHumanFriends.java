@@ -6,7 +6,10 @@ import Model.Animals.Interfaces.Teachable;
 import Model.Exceptions.IllegalValueException;
 
 import java.text.ParseException;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ServiceHumanFriends {
@@ -72,8 +75,27 @@ public class ServiceHumanFriends {
         }
     }
 
-    public void addAnimal(String name, String type, String birthday, String commands, String otherData) throws ParseException, IllegalValueException {
-        Teachable animal = builder.build(name,type,birthday,commands,otherData);
+    public void addAnimal(String name, String type, Date birthday, String commands, String otherData) throws ParseException, IllegalValueException {
+        Teachable animal = builder.build(name, type, birthday, commands, otherData);
         addAnimal(animal);
+    }
+
+    public String showBirthdayAnimals(Date birthday) {
+        StringBuilder sb = new StringBuilder();
+
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        calendar1.setTime(birthday);
+        int d = calendar1.get(Calendar.DAY_OF_MONTH);
+        int m = calendar1.get(Calendar.MONTH);
+
+        for (Teachable an : animals) {
+            calendar2.setTime(an.getBirthday());
+            if(d == calendar2.get(Calendar.DAY_OF_MONTH) && m == calendar2.get(Calendar.MONTH)) {
+                sb.append(an.getShortInfo());
+                sb.append("\n");
+           }
+        }
+        return sb.toString();
     }
 }

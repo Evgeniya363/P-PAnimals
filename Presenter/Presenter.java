@@ -4,6 +4,8 @@ import Model.Exceptions.IdNotFoundException;
 import Model.Services.ServiceHumanFriends;
 import View.UI;
 
+import java.util.Date;
+
 public class Presenter {
     private final ServiceHumanFriends serviceHumanFriends;
     UI ui;
@@ -17,9 +19,9 @@ public class Presenter {
         return serviceHumanFriends.toString();
     }
 
-    public void addAnimal(String name, String type, String birthday, String commands, String otherData) {
+    public void addAnimal(String name, String type, Date birthday, String commands, String otherData) {
         try{
-            serviceHumanFriends.addAnimal(name, type,birthday,commands,otherData);
+            serviceHumanFriends.addAnimal(name, type, birthday,commands,otherData);
 //            ui.showMessage("\nДобавлено!");
         } catch (Exception e) {
             ui.showMessage(e.getMessage());
@@ -41,5 +43,9 @@ public class Presenter {
 
     public String showCommands() throws IdNotFoundException {
         return serviceHumanFriends.showCommands();
+    }
+
+    public String showBirthdayAnimals(Date birthday) {
+        return  serviceHumanFriends.showBirthdayAnimals(birthday);
     }
 }

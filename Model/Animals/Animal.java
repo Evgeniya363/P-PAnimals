@@ -9,31 +9,29 @@ import java.util.Date;
 
 public abstract class Animal implements Infotable {
     private int id;
-    private static int countId;
+//    private static int countId;
     private final Date birthday;
-    public static SimpleDateFormat simpleDateFormat;
-    private static DateFormat df;
+    public static DateFormat df;
 
     static {
-        simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         df = new SimpleDateFormat("dd.MM.yyyy");
     }
 
-    public Animal(String birthday) throws ParseException {
-        this.id = genId();
-        this.birthday = df.parse(birthday);
+    public Animal(int id, Date birthday) throws ParseException {
+        this.id = id;
+        this.birthday = birthday;
     }
-    private int genId(){
-        return ++countId;
-    }
+//    private int genId(){
+//        return ++countId;
+//    }
 
     public int getId() {
         return id;
     }
 
-    public static int getCountId() {
-        return countId;
-    }
+//    public static int getCountId() {
+//        return countId;
+//    }
 
     public Date getBirthday() {
         return birthday;
@@ -43,7 +41,7 @@ public abstract class Animal implements Infotable {
     @Override
     public String getInfo() {
         return  getShortInfo() +
-                ", день рождения: " + simpleDateFormat.format(birthday);
+                ", день рождения: " + df.format(birthday);
     }
 
     @Override
@@ -51,7 +49,5 @@ public abstract class Animal implements Infotable {
         return  "id: " + id +
                 ", животное: " + this.getClass().getSimpleName();
     }
-
-
 
 }
