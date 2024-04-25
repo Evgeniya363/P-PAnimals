@@ -1,4 +1,4 @@
-package View.Commands;
+package View.MenuItems;
 
 import View.UI;
 

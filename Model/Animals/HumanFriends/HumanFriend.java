@@ -9,14 +9,14 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class HumanFriend extends Animal implements Teachable {
-    private String name;
-    private List<String> commands;
+    private final String name;
+    private final List<String> commands;
 
     public HumanFriend(int id, String name, Date birthday, List<String> commands) throws ParseException {
         super(id, birthday);
         this.name = name;
         this.commands=new ArrayList<>();
-        this.commands.addAll(commands);
+        commands.forEach(n -> this.commands.add(n.trim()));
     }
 
 
