@@ -7,10 +7,11 @@ import Model.Exceptions.IllegalValueException;
 
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Builder {
-    public Teachable build (String name, String type, String birthday, String commands, String otherData) throws ParseException, IllegalValueException {
+    public Teachable build (String name, String type, Date birthday, String commands, String otherData) throws ParseException, IllegalValueException {
         Teachable animal = null;
         List<String> commandList = Arrays.asList(commands.split(","));
         try {
