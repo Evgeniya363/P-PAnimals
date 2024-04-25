@@ -6,7 +6,6 @@ import Model.Animals.Interfaces.Teachable;
 import Model.Exceptions.IllegalValueException;
 
 import java.text.ParseException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,19 +13,19 @@ import java.util.List;
 
 public class ServiceHumanFriends {
     private final List<Teachable> animals = new ArrayList<>();
-    private static ServiceHumanFriends animalList;
+    private static ServiceHumanFriends serviceHumanFriends;
 
     private ServiceHumanFriends() {
-        animalList = this;
+        serviceHumanFriends = this;
     }
     private final Builder builder = new Builder();
-    private Infotable foundAnimal; //Животное, найденное при последней попытке поиска
+    private List<Infotable> foundAnimalList; //Список животных формируется при выборе по id
 
-    public static ServiceHumanFriends getAnimalList() { // Возвращаем ссылку на единственный экземпляр класса
-        if(animalList == null) {
+    public static ServiceHumanFriends getServiceHumanFriends() { // Возвращаем ссылку на единственный экземпляр класса
+        if(serviceHumanFriends == null) {
             new ServiceHumanFriends();
         }
-        return animalList;
+        return serviceHumanFriends;
     }
 
     public void addAnimal(Teachable animal) {
@@ -46,33 +45,42 @@ public class ServiceHumanFriends {
         return  sb.toString();
     }
 
-    public void addCommand(String command) throws IdNotFoundException {
-        if(foundAnimal != null){
-            ((Teachable)foundAnimal).teachCommand(command);
-        } else {
-            throw new IdNotFoundException("id не найден");
+    public boolean addCommand(String command) {
+        if(!foundAnimalList.isEmpty()) {
+            Teachable animal = (Teachable) foundAnimalList.removeFirst();
+            if (!command.isEmpty()) {
+                animal.teachCommand(command);
+            }
+            return true;
         }
+        return false;
     }
 
-    public String findAnimalById(int id) throws IdNotFoundException {
-        foundAnimal = null;
-        int pos = 0;
+    public void findAnimalById(int id) throws IdNotFoundException {
+        foundAnimalList = new ArrayList<>();
+
         for(Teachable animal : animals) {
             if(animal.getId() == id) {
-                foundAnimal = animals.get(pos);
-                return foundAnimal.getShortInfo();
+                foundAnimalList.add(animal);
             }
-            pos++;
         }
-        throw new IdNotFoundException("id не найден");
+        if (foundAnimalList.isEmpty()) {
+            throw new IdNotFoundException("id не найден");
+        }
     }
 
     public String showCommands() throws IdNotFoundException {
-        if(foundAnimal != null){
-            return ((Teachable)foundAnimal).showCommands();
-        } else {
+        StringBuilder sb = new StringBuilder();
+        foundAnimalList.forEach(n ->
+             sb.append(((Teachable)n).getShortInfo())
+                    .append(", команды: ")
+                    .append(((Teachable)n).showCommands())
+                    .append("\n")
+        );
+        if(sb.isEmpty()){
             throw new IdNotFoundException("id не найден");
         }
+        return sb.toString(); //((Teachable)foundAnimal).showCommands();
     }
 
     public void addAnimal(String name, String type, Date birthday, String commands, String otherData) throws ParseException, IllegalValueException {
@@ -98,4 +106,14 @@ public class ServiceHumanFriends {
         }
         return sb.toString();
     }
+
+    public String getFoundItem() {
+        if(foundAnimalList.isEmpty()){
+            return "";
+        } else {
+            return foundAnimalList.getFirst().getShortInfo();
+        }
+    }
+
+
 }

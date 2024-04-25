@@ -11,7 +11,7 @@ public class Presenter {
     UI ui;
 
     public Presenter(UI ui) {
-        this.serviceHumanFriends = ServiceHumanFriends.getAnimalList();
+        this.serviceHumanFriends = ServiceHumanFriends.getServiceHumanFriends();
         this.ui = ui;
     }
 
@@ -22,23 +22,24 @@ public class Presenter {
     public void addAnimal(String name, String type, Date birthday, String commands, String otherData) {
         try{
             serviceHumanFriends.addAnimal(name, type, birthday,commands,otherData);
-//            ui.showMessage("\nДобавлено!");
         } catch (Exception e) {
-            ui.showMessage(e.getMessage());
+            UI.showMessage(e.getMessage());
         }
     }
 
-    public void addCommand(String command) {
-        try {
-            serviceHumanFriends.addCommand(command);
-            ui.showMessage("Команда добавлена");
-        } catch (Exception e) {
-            ui.showMessage(e.getMessage());
+    public boolean addCommand(String command) {
+        if(command.isEmpty()) {
+            UI.showMessage("Пропущено\n");
+            return serviceHumanFriends.addCommand(command);
+        } else if (serviceHumanFriends.addCommand(command)) {
+            UI.showMessage("Команда добавлена\n");
+            return true;
         }
+        return false;
     }
 
     public void findAnimalById(int id) throws IdNotFoundException {
-        ui.showMessage("\nВыбрано: " + serviceHumanFriends.findAnimalById(id));
+        serviceHumanFriends.findAnimalById(id);
     }
 
     public String showCommands() throws IdNotFoundException {
@@ -47,5 +48,9 @@ public class Presenter {
 
     public String showBirthdayAnimals(Date birthday) {
         return  serviceHumanFriends.showBirthdayAnimals(birthday);
+    }
+
+    public String getFoundItem() {
+        return serviceHumanFriends.getFoundItem();
     }
 }

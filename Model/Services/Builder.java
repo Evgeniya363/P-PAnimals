@@ -28,9 +28,5 @@ public class Builder {
         } catch ( ParseException e) {
             throw new DateParseException("Неверный формат даты: " + birthday, 0);
         }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            throw  new IllegalValueException("Ошибочка");
-//        }
     }
 }
