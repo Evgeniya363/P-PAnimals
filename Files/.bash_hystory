@@ -1,0 +1,20 @@
+cat > Pets.txt
+cat Pets.txt
+cat Pets.txt PackAnimals.txt > Animals.txt
+mv Animals.txt HumanFriends.txt
+ls
+mkdir HumanAnimals
+mv HumanFriends.txt HumanAnimals/
+ls HumanAnimals
+sudo nano mysql_pubkey.asc
+sudo apt-key list
+sudo apt-key export A8D3785C | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/mysql.gpg
+sudo apt-get update
+sudo apt-get install mysql-server
+systemctl status mysql
+sudo dpkg -i ~/Загрузки/mysql-apt-config_0.8.29-1_all.deb 
+sudo apt-get update
+sudo apt-get install mysql-server
+dpkg -l | grep mysql | grep ii
+sudo dpkg -r mysql-apt-config mysql-common mysql-server-core-8.0 mysql-client-8.0 mysql-server mysql-client-core-8.0  mysql-server-8.0 
+cat .bash_history
