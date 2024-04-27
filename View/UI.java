@@ -1,6 +1,8 @@
 package View;
 
 import Model.Exceptions.IdNotFoundException;
+import Model.Services.HumanFriendsList;
+import Model.Services.Serialization;
 import Presenter.Presenter;
 import View.Commands.AddAnimalCommand;
 import View.Commands.ServiceCommands;
@@ -80,6 +82,7 @@ public class UI {
     }
 
     public void exit() {
+        Presenter.writeData(); // Сохраняем данные в файл
         System.out.println("\nДо встречи!");
     }
 
