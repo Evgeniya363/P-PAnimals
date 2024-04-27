@@ -42,12 +42,13 @@ public class ServiceCommands {
 
     public void init() {
         try {
-            presenter.addAnimal("Rex", "Dog", UI.df.parse("01.01.2020"), "Sit, Stay, Fetch", "Cage");
-            presenter.addAnimal("Whiskers", "Cat", UI.df.parse("15.05.2019"), "Sit, Pounce", "Box");
-            presenter.addAnimal("Hammy", "Hamster", UI.df.parse("10.03.2021"), "Roll, Hide", "Terrarium");
-            presenter.addAnimal("Thunder", "Horse", UI.df.parse("21.07.2021"), "Trot, Canter, Gallop", "300");
-            presenter.addAnimal("Sandy", "Camel", UI.df.parse("03.11.2016"), "Sit, Stay, Roll", "600");
-            presenter.addAnimal("Eeyore", "Donkey", UI.df.parse("01.01.2019"), "Walk, Carry Load, Bray", "250");
+            presenter.readData();
+//            presenter.addAnimal("Rex", "Dog", UI.df.parse("01.01.2020"), "Sit, Stay, Fetch", "Cage");
+//            presenter.addAnimal("Whiskers", "Cat", UI.df.parse("15.05.2019"), "Sit, Pounce", "Box");
+//            presenter.addAnimal("Hammy", "Hamster", UI.df.parse("10.03.2021"), "Roll, Hide", "Terrarium");
+//            presenter.addAnimal("Thunder", "Horse", UI.df.parse("21.07.2021"), "Trot, Canter, Gallop", "300");
+//            presenter.addAnimal("Sandy", "Camel", UI.df.parse("03.11.2016"), "Sit, Stay, Roll", "600");
+//            presenter.addAnimal("Eeyore", "Donkey", UI.df.parse("01.01.2019"), "Walk, Carry Load, Bray", "250");
         } catch(Exception e) {
             UI.showMessage(e.getMessage());
         }
