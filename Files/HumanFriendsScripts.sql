@@ -3,23 +3,6 @@ CREATE DATABASE IF NOT EXISTS HumanFriends;
 SHOW DATABASES;
 USE  HumanFriends;
 
-
--- DELIMITER //
---  
---  DROP FUNCTION IF EXISTS getId//
---  -- Функция переводит секунды в строку: дни-часы-минуты-секунды
---  CREATE FUNCTION getId (i INT)
---  RETURNS INT DETERMINISTIC
---  BEGIN
--- 		SET @i := i + 1;
---     RETURN @i;  #days;
---  END//
---  
---  DELIMITER ;
-
-
-
- 
 -- Создаем таблицу Dog и заполняем ее: , InventoryValue AS QtyAvailable * UnitPrice
 DROP TABLE IF EXISTS Dogs;
 CREATE  TABLE Dogs (
@@ -27,11 +10,7 @@ CREATE  TABLE Dogs (
 	name VARCHAR(20) NOT NULL,
 	birthday Date,
 	commands VARCHAR(50)
-);	
-  
-  -- SELECT MAX(id) FROM (SELECT id FROM Dogs UNION SELECT id FROM Cats UNION SELECT id FROM Hamsters) b;
-  
-
+);
 
 -- Выполняем поверхностное клонирование (копирование структуры) из Dogs в Cats, Hamsters, Camel, Horses, Donkeys:
 DROP TABLE IF EXISTS Cats, Hamsters, Camels, Horses, Donkeys;

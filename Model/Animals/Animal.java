@@ -3,13 +3,20 @@ package Model.Animals;
 import Model.Animals.Interfaces.Infotable;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Базовый класс Animal является родителем классов всех животных.
+ * Определяет поля:
+ * id идентификатор животного,
+ * birthday день рождения животного;
+ * статическое поле DateFormat -  формат вывода дат;
+ * конструктор класса Animal(int id, Date birthday);
+ * методы getId(), getBirthday(), getShortInfo()
+ */
 public abstract class Animal implements Infotable {
-    private int id;
-//    private static int countId;
+    private final int id;
     private final Date birthday;
     public static DateFormat df;
 
@@ -17,33 +24,32 @@ public abstract class Animal implements Infotable {
         df = new SimpleDateFormat("dd.MM.yyyy");
     }
 
-    public Animal(int id, Date birthday) throws ParseException {
+    /**
+     * Конструктор класса Animal
+     * @param id идентификатор животного
+     * @param birthday день рождения животного
+     */
+    public Animal(int id, Date birthday) {
         this.id = id;
         this.birthday = birthday;
     }
-//    private int genId(){
-//        return ++countId;
-//    }
 
     public int getId() {
         return id;
     }
 
-//    public static int getCountId() {
-//        return countId;
-//    }
-
+    /**
+     * Возвращает дату рождения животного
+     * @return значение поля birthday типа Date
+     */
     public Date getBirthday() {
         return birthday;
     }
 
-
-    @Override
-    public String getInfo() {
-        return  getShortInfo() +
-                ", день рождения: " + df.format(birthday);
-    }
-
+    /**
+     * Выводит информацию о животном: id, тип животного, кличка, день рождения, список команд
+     * @return строка информации
+     */
     @Override
     public String getShortInfo() {
         return  "id: " + id +
