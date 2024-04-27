@@ -1,11 +1,19 @@
 package Presenter;
 
+import Model.Animals.Interfaces.Teachable;
 import Model.Exceptions.IdNotFoundException;
+import Model.Services.Serialization;
 import Model.Services.ServiceHumanFriends;
 import View.UI;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * Класс обеспечивает взаимосвязь пользовательского интерфейса и сервисной части модели.
+ * методы дублируют команды меню UI
+ */
 public class Presenter {
     private final ServiceHumanFriends serviceHumanFriends;
     UI ui;
@@ -52,5 +60,23 @@ public class Presenter {
 
     public String getFoundItem() {
         return serviceHumanFriends.getFoundItem();
+    }
+
+    public static void readData() {
+        try{
+            ServiceHumanFriends.readData();
+            UI.showMessage("Данные считаны");
+        } catch (Exception e) {
+            UI.showMessage("Ошибка чтения из файла");
+        }
+    }
+
+    public static void writeData() {
+        try{
+            ServiceHumanFriends.writeData();
+            UI.showMessage("Данные записаны");
+        } catch (Exception e) {
+            UI.showMessage("Ошибка записи в файл");
+        }
     }
 }

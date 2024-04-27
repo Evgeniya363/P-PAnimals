@@ -36,6 +36,7 @@ public class AddAnimalCommand {
                 birthday = ServiceCommands.inputDate("\nДата рождения: ");
             } catch (Exception e) {
                 UI.showMessage(e.getMessage());
+                return;
             }
 
 
